@@ -42,3 +42,24 @@ android {
 flutter {
     source = "../.."
 }
+
+def dartEnvironmentVariables = []
+if (project.hasProperty('dart-defines')) {
+    dartEnvironmentVariables = project.property('dart-defines').split(',').collectEntries {
+        def pair = new String(it.decodeBase64(), 'UTF-8').split('=')
+        [(pair[0]): pair[1]]
+    }
+}
+
+android {
+    defaultConfig {
+        // Mengambil variabel APP_MODE dari --dart-define Flutter
+        def appMode = dartEnvironmentVariables.APP_MODE ?: "DEV"
+        
+        if (appMode == "PROD") {
+            resValue "string", "app_name", "UTD - 20123061" 
+        } else {
+            resValue "string", "app_name", "DEV - Naia"
+        }
+    }
+}
