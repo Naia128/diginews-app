@@ -4,20 +4,22 @@ import '../../features/news/presentation/pages/home_page.dart';
 
 final router = GoRouter(
 
-routes: [
+  routes: [
 
-GoRoute(
+    GoRoute(
 
-path: '/',
+      path: '/',
 
-builder: (context,state){
+      builder:
 
-return HomePage();
+          (context, state) {
 
-}
+        return const HomePage();
 
-)
+      },
 
-]
+    ),
+
+  ],
 
 );
