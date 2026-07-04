@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'core/config/app_config.dart';
 import 'core/dependency_injection/injector.dart';
-
 import 'core/router/app_router.dart';
 
 import 'features/news/presentation/bloc/news_cubit.dart';
-import 'core/config/app_config.dart';
 
 void main() async {
 
@@ -15,7 +14,9 @@ void main() async {
   await init();
 
   runApp(
+
     const MyApp(),
+
   );
 
 }
@@ -45,7 +46,27 @@ class MyApp extends StatelessWidget {
 
             false,
 
-        routerConfig: router,
+        title: appTitle,
+
+        theme:
+
+            ThemeData(
+
+          colorSchemeSeed:
+
+              isProd
+
+                  ? Colors.indigo.shade900
+
+                  : Colors.teal,
+
+          useMaterial3: true,
+
+        ),
+
+        routerConfig:
+
+            router,
 
       ),
 

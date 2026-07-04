@@ -4,3 +4,7 @@ const appMode = String.fromEnvironment(
 );
 
 const isProd = appMode == 'PROD';
+
+const appTitle = isProd
+    ? 'UTD - 20123061'
+    : 'DEV - Naia';
