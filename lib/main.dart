@@ -8,70 +8,61 @@ import 'core/router/app_router.dart';
 import 'features/news/presentation/bloc/news_cubit.dart';
 
 void main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
 
   await init();
 
   runApp(
-
     const MyApp(),
-
   );
-
 }
 
 class MyApp extends StatelessWidget {
-
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return BlocProvider(
+      create: (_) => sl<NewsCubit>()
+        ..fetchNews(),
 
-      create:
+      child: MaterialApp.router(
 
-          (_) =>
-
-              sl<NewsCubit>()
-
-                ..fetchNews(),
-
-      child:
-
-          MaterialApp.router(
-
-        debugShowCheckedModeBanner:
-
-            false,
+        debugShowCheckedModeBanner: false,
 
         title: appTitle,
 
-        theme:
+        theme: ThemeData(
 
-            ThemeData(
+          useMaterial3: true,
 
           colorSchemeSeed:
 
               isProd
-
                   ? Colors.indigo.shade900
-
                   : Colors.teal,
 
-          useMaterial3: true,
+          appBarTheme: AppBarTheme(
+
+            backgroundColor:
+
+                isProd
+                    ? Colors.indigo.shade900
+                    : Colors.teal,
+
+            foregroundColor:
+                Colors.white,
+
+            centerTitle: true,
+
+          ),
 
         ),
 
-        routerConfig:
-
-            router,
+        routerConfig: router,
 
       ),
 
     );
-
   }
-
 }
