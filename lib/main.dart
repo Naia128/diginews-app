@@ -6,6 +6,7 @@ import 'core/dependency_injection/injector.dart';
 import 'core/router/app_router.dart';
 
 import 'features/news/presentation/bloc/news_cubit.dart';
+import 'core/config/app_config.dart';
 
 void main() async {
 
