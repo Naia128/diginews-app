@@ -4,19 +4,29 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+val appMode =
+    System.getProperty(
+        "APP_MODE"
+    ) ?: "DEV"
+
 android {
 
-    namespace = "com.example.diginews_app"
+    namespace =
+        "com.example.diginews_app"
 
-    compileSdk = flutter.compileSdkVersion
+    compileSdk =
+        flutter.compileSdkVersion
 
-    ndkVersion = flutter.ndkVersion
+    ndkVersion =
+        flutter.ndkVersion
 
     compileOptions {
 
-        sourceCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility =
+            JavaVersion.VERSION_17
 
-        targetCompatibility = JavaVersion.VERSION_17
+        targetCompatibility =
+            JavaVersion.VERSION_17
 
     }
 
@@ -28,20 +38,39 @@ android {
 
     defaultConfig {
 
-        applicationId = "com.example.diginews_app"
+        applicationId =
+            "com.example.diginews_app"
 
-        minSdk = flutter.minSdkVersion
+        minSdk =
+            flutter.minSdkVersion
 
-        targetSdk = flutter.targetSdkVersion
+        targetSdk =
+            flutter.targetSdkVersion
 
-        versionCode = flutter.versionCode
+        versionCode =
+            flutter.versionCode
 
-        versionName = flutter.versionName
+        versionName =
+            flutter.versionName
 
         resValue(
+
             "string",
+
             "app_name",
-            "DEV - Naia"
+
+            if (
+
+                appMode == "PROD"
+
+            )
+
+                "UTD - 20123061"
+
+            else
+
+                "DEV - Naia"
+
         )
 
     }
@@ -51,8 +80,11 @@ android {
         release {
 
             signingConfig =
+
                 signingConfigs.getByName(
+
                     "debug"
+
                 )
 
         }

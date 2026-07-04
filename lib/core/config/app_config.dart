@@ -3,8 +3,10 @@ const appMode = String.fromEnvironment(
   defaultValue: 'DEV',
 );
 
-const isProd = appMode == 'PROD';
+const isProd =
+    appMode == 'PROD';
 
-const appTitle = isProd
-    ? 'UTD - 20123061'
-    : 'DEV - Naia';
+const appTitle =
+    isProd
+        ? 'UTD - 20123061'
+        : 'DEV - Naia';
