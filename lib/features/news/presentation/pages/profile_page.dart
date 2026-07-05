@@ -1,90 +1,150 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget{
 
-  const ProfilePage({
-    super.key,
-  });
+const ProfilePage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
+@override
+State<ProfilePage> createState()
 
-    return Scaffold(
+=> _ProfilePageState();
 
-      appBar: AppBar(
+}
 
-        title: const Text(
-          "Profile",
-        ),
+class _ProfilePageState
 
-      ),
+extends State<ProfilePage>{
 
-      body: const Center(
+int tapCount=0;
 
-        child: Column(
+bool showSecret=false;
 
-          mainAxisAlignment:
+void onTap(){
 
-              MainAxisAlignment.center,
+tapCount++;
 
-          children: [
+if(tapCount==1){
 
-            CircleAvatar(
+setState((){
 
-              radius: 50,
+showSecret=true;
 
-              child: Icon(
+});
 
-                Icons.person,
+Timer(
 
-                size: 50,
+const Duration(
 
-              ),
+seconds:3
 
-            ),
+),
 
-            SizedBox(
+(){
 
-              height: 16,
+setState((){
 
-            ),
+showSecret=false;
 
-            Text(
+});
 
-              "Naia Sila Azachra",
+tapCount=0;
 
-              style: TextStyle(
+}
 
-                fontSize: 20,
+);
 
-                fontWeight:
+}
 
-                    FontWeight.bold,
+}
 
-              ),
+@override
+Widget build(BuildContext context){
 
-            ),
+return Scaffold(
 
-            SizedBox(
+appBar: AppBar(
 
-              height: 8,
+title:
 
-            ),
+const Text(
 
-            Text(
+'About'
 
-              "20123061",
+)
 
-            )
+),
 
-          ],
+body:
 
-        ),
+Stack(
 
-      ),
+children:[
 
-    );
+Center(
 
-  }
+child:
+
+GestureDetector(
+
+onTap:onTap,
+
+child:
+
+CircleAvatar(
+
+radius:70,
+
+backgroundImage:
+
+AssetImage(
+
+'assets/profile.jpg'
+
+),
+
+),
+
+),
+
+),
+
+if(showSecret)
+
+Container(
+
+color: Colors.black87,
+
+child:
+
+Center(
+
+child:
+
+Lottie.asset(
+
+'assets/animations/secret.json',
+
+width:350,
+
+height:350
+
+),
+
+),
+
+),
+
+)
+
+],
+
+),
+
+);
+
+}
 
 }

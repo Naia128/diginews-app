@@ -1,29 +1,65 @@
-import '../../domain/entities/article.dart';
-import '../../domain/repositories/news_repository.dart';
-
-import '../datasources/news_remote_datasource.dart';
-
 class NewsRepositoryImpl
-    implements NewsRepository {
+implements NewsRepository{
 
-  final NewsRemoteDatasource datasource;
+final NewsRemoteDatasource remote;
+final Isar isar;
 
-  NewsRepositoryImpl(this.datasource);
+NewsRepositoryImpl(
 
-  @override
-  Future<List<Article>> getNews() async {
+this.remote,
+this.isar
 
-    final articles =
-        await datasource.getArticles();
+);
 
-    // NIM 20123061 → ganjil
-    // Descending Z → A
+@override
+Future<List<Article>> getNews()
+async{
 
-    articles.sort(
-      (a, b) =>
-          b.title.compareTo(a.title),
-    );
+try{
 
-    return articles;
-  }
+final articles =
+await remote.getArticles();
+
+articles.sort(
+
+(a,b)=>
+
+b.title.compareTo(
+
+a.title
+
+)
+
+);
+
+await isar.writeTxn(() async{
+
+await isar.articleModels.clear();
+
+await isar.articleModels.putAll(
+
+articles
+
+);
+
+});
+
+return articles;
+
+}
+
+catch(_){
+
+final cached=
+
+await isar.articleModels.where()
+
+.findAll();
+
+return cached;
+
+}
+
+}
+
 }
