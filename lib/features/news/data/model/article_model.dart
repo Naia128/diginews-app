@@ -1,17 +1,21 @@
-import '../../domain/entities/article.dart';
+import 'package:isar/isar.dart';
 
-class ArticleModel extends Article {
-  ArticleModel({
-    required super.title,
-    required super.imageUrl,
-    required super.summary,
-  });
+part 'article_model.g.dart';
 
-  factory ArticleModel.fromJson(Map<String, dynamic> json) {
-    return ArticleModel(
-      title: json['title'] ?? '',
-      imageUrl: json['image_url'] ?? '',
-      summary: json['summary'] ?? '',
-    );
-  }
+@collection
+class ArticleModel {
+
+Id id = Isar.autoIncrement;
+
+String title;
+
+String summary;
+
+ArticleModel({
+
+required this.title,
+required this.summary
+
+});
+
 }
