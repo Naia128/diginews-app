@@ -1,8 +1,10 @@
 import '../../domain/entities/article.dart';
 import '../../domain/repositories/news_repository.dart';
-import '../datasource/news_remote_datasource.dart';
 
-class NewsRepositoryImpl implements NewsRepository {
+import '../datasources/news_remote_datasource.dart';
+
+class NewsRepositoryImpl
+    implements NewsRepository {
 
   final NewsRemoteDatasource datasource;
 
@@ -11,11 +13,15 @@ class NewsRepositoryImpl implements NewsRepository {
   @override
   Future<List<Article>> getNews() async {
 
-    final articles = await datasource.getArticles();
+    final articles =
+        await datasource.getArticles();
 
-    // NIM akhir 1 → descending
+    // NIM 20123061 → ganjil
+    // Descending Z → A
+
     articles.sort(
-      (a, b) => b.title.compareTo(a.title),
+      (a, b) =>
+          b.title.compareTo(a.title),
     );
 
     return articles;
