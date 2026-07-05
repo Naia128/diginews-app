@@ -2,44 +2,58 @@ import 'package:dio/dio.dart';
 
 import '../model/article_model.dart';
 
-class NewsRemoteDatasource{
+class NewsRemoteDatasource {
 
-final Dio dio;
+  final Dio dio;
 
-NewsRemoteDatasource(
+  NewsRemoteDatasource(
 
-this.dio
+    this.dio,
 
-);
+  ){
 
-Future<List<ArticleModel>>
+    dio.interceptors.add(
 
-getArticles()
+      LogInterceptor(
 
-async{
+        requestBody: true,
 
-final response = await dio.get(
+        responseBody: true,
 
-'https://api.spaceflightnewsapi.net/v4/articles'
+      ),
 
-);
+    );
 
-return
+  }
 
-(response.data['results']
+  Future<List<ArticleModel>>
 
-as List)
+  getArticles()
 
-.map(
+  async{
 
-(e)=>
+    final response = await dio.get(
 
-ArticleModel.fromJson(e)
+      'https://api.spaceflightnewsapi.net/v4/articles',
 
-)
+    );
 
-.toList();
+    return
 
-}
+    (response.data['results']
+
+    as List)
+
+    .map(
+
+      (e)=>
+
+      ArticleModel.fromJson(e),
+
+    )
+
+    .toList();
+
+  }
 
 }
